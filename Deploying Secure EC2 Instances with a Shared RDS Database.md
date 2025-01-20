@@ -9,3 +9,8 @@
 - Immutable Infrastructure: Terraform encourages the creation of immutable infrastructure through declarative configuration files. This means your infrastructure can be versioned and treated as you would with application code.
 - Idempotency: Terraform ensures that running the same configuration multiple times results in the same state, avoiding manual errors and inconsistencies.
 - Scalability: With Terraform, scaling your infrastructure up or down becomes a matter of changing a few lines in your configuration file.
+
+## Setting Up Your AWS Environment with Terraform
+
+- Before diving into the specifics, please make sure you have Terraform and AWS CLI installed and configured on your machine.
+- Creating a Terraform Configuration File
