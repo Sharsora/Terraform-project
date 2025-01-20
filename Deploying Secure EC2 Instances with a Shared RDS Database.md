@@ -13,4 +13,12 @@
 ## Setting Up Your AWS Environment with Terraform
 
 - Before diving into the specifics, please make sure you have Terraform and AWS CLI installed and configured on your machine.
-- Creating a Terraform Configuration File
+
+## Creating a Terraform Configuration File
+
+- Create a new directory for your project and within it, create a file named main.tf. This file will contain the configuration for your AWS resources.
+```sh
+provider "aws" {
+  region = "us-east-1"
+}
+```
