@@ -171,3 +171,28 @@ resource "aws_network_interface" "nw-interface2" {
 }
 ```
 
+- Attach the network (AppVPC) to any Internet Gateway. Tag this gateway as AppInternetGateway.
+
+- Also, create a route table for the VPC AppVPC. Tag this table as AppRouteTable. Create an associated output for this ID named route_table_ID.
+
+```sh
+resource "aws_internet_gateway" "AppIGW" {
+  vpc_id = aws_vpc.AppVPC.id
+
+  tags = {
+    Name = "AppInternetGateway"
+  }
+}
+
+resource "aws_route_table" "AppRouteTable" {
+  vpc_id = aws_vpc.AppVPC.id
+  tags = {
+    Name = "AppRouteTable"
+  }
+}
+
+output "route_table_ID" {
+  value = aws_route_table.AppRouteTable.id
+}
+```
+
