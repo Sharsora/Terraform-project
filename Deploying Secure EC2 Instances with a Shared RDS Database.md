@@ -352,3 +352,50 @@ resource "aws_db_instance" "app_database" {
   }
 }
 ```
+
+- Now that both the EC2 instances and the RDS database have been created, lets use one of our EC2 instance to connect to the database.
+
+- From the AWS Management Console, grab the public IPv4 address of one of the EC2 instances - WebServer1 or WebServer2.
+
+- In the root directory of your terminal, run the following command:
+
+```sh
+ssh -i my-ec2-key.pem ec2-user@<public_IP>
+```
+- Replace <public_IP> with the IP of your instance.
+
+- Enter yes when you encounter this prompt:
+```sh
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+```
+- Since, our AMI instance doesn't have MySQL pre-installed, run the following commands sequentially to install it:
+```sh
+sudo wget https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
+
+sudo dnf install mysql80-community-release-el9-1.noarch.rpm -y
+
+sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
+
+sudo dnf install mysql-community-client -y
+```
+- Once MySQL is installed, run the following command to connect to the database:
+```sh
+mysql -h <DB_endpoint> -P 3306 -u admin -p
+```
+
+- Replace the <DB_endpoint> with the endpoint of your database instance that was created.
+
+- When prompted for password, enter db*pass123 - the password you created via terraform.
+
+
+
+
+
+
+
+
+
+
+
+
+
