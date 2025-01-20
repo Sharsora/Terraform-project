@@ -222,6 +222,8 @@ resource "aws_route_table_association" "AppSubnet2_association" {
 }
 ```
 
+### Elastic Compute Cloud (EC2)
+
 - To ensure that our future EC2 instances get assigned a public IP address, create two Elastic IP (EIP) resources and attach to one network interface each - nw-interface1 andnw-interface2.
 
 ```sh
@@ -233,5 +235,56 @@ resource "aws_eip" "public_ip1" {
 resource "aws_eip" "public_ip2" {
   vpc = true
   network_interface = aws_network_interface.nw-interface2.id
+}
+```
+
+- EC2 instances will host our web application. We will create an instance within our VPC and associate it with the security group we defined.
+- Create two EC2 instances within AppVPC, one in each subnet (AppSubnet1 and AppSubnet2), using the ami-06c68f701d8090592 AMI and t2.micro instance type.
+- Create a key-pair for the EC2 instances called my-ec2-key. Store it in /root. Use this key-pair for both the EC2 instances.
+- Tag the instances with Name as WebServer1 (AppSubnet1) and WebServer2 (AppSubnet2) respectively.
+- Attach the appropriate network interfaces to each instance according to their subnet ID.
+
+- First, run the following command in the terminal to create a key-pair:
+```sh
+aws ec2 create-key-pair --key-name my-ec2-key --query 'KeyMaterial' --output text > /root/my-ec2-key.pem
+```
+
+- Change the permissions of the key so that the root user has read and write access to it:
+```sh
+chmod 600 /root/my-ec2-key.pem
+```
+- To the .tf extension file, append the EC2 instances configuration:
+
+```sh
+resource "aws_instance" "WebServer1" {
+  ami             = "ami-06c68f701d8090592"
+  instance_type   = "t2.micro"
+
+  network_interface {
+    network_interface_id = aws_network_interface.nw-interface1.id
+    device_index = 0
+  }
+
+  key_name = "my-ec2-key"
+
+  tags = {
+    Name = "WebServer1"
+  }
+}
+
+resource "aws_instance" "WebServer2" {
+  ami             = "ami-06c68f701d8090592"
+  instance_type   = "t2.micro"
+
+  network_interface {
+    network_interface_id = aws_network_interface.nw-interface2.id
+    device_index = 0
+  }
+
+  key_name = "my-ec2-key"
+
+  tags = {
+    Name = "WebServer2"
+  }
 }
 ```
