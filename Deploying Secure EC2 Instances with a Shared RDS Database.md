@@ -195,4 +195,29 @@ output "route_table_ID" {
   value = aws_route_table.AppRouteTable.id
 }
 ```
+- Create a route in your AWS infrastructure to allow internet access. The route should be associated with the route table named AppRouteTable and should direct traffic to the internet gateway named AppInternetGateway.
 
+- Set the destination CIDR block to 0.0.0.0/0 to allow all outbound traffic.
+
+
+```sh
+resource "aws_route" "internet_access" {
+  route_table_id         = aws_route_table.AppRouteTable.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.AppIGW.id
+}
+```
+
+- Associate two subnets, AppSubnet1 and AppSubnet2, with the route table named AppRouteTable to ensure that the subnets use this route table for their traffic routing.
+
+```sh
+resource "aws_route_table_association" "AppSubnet1_association" {
+  subnet_id      = aws_subnet.AppSubnet1.id
+  route_table_id = aws_route_table.AppRouteTable.id
+}
+
+resource "aws_route_table_association" "AppSubnet2_association" {
+  subnet_id      = aws_subnet.AppSubnet2.id
+  route_table_id = aws_route_table.AppRouteTable.id
+}
+```
