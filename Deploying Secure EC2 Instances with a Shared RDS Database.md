@@ -321,7 +321,7 @@ resource "aws_db_subnet_group" "app_db_subnet_group" {
 ```
 
 - Now, provision an RDS instance in AppVPC. The database should be accessible from the WebServer security group and have the following specs:
-Allocated storage: 20
+`Allocated storage: 20
 Engine: mysql
 Engine version: 8.0.33
 Instance class: db.t3.micro
@@ -329,7 +329,7 @@ Database name: appdatabase
 Username: admin
 Password: db*pass123
 Database subnet group: app_db_subnet_group
-VPC security group ID: ID of WebTrafficSG
+VPC security group ID: ID of WebTrafficSG`
 - Ensure that the database is publicly accessible. Tag the RDS instance with Name as AppDatabase.
 
 
