@@ -392,7 +392,16 @@ mysql -h <DB_endpoint> -P 3306 -u admin -p
 
 
 
+- Having logged into your RDS instance from one of the EC2 instances - you should now be able to execute all SQL queries.
 
+- Run the following query:
+
+```sh
+SHOW DATABASES;
+```
+- You should see a list of databases, one of them being appdatabase - the one we created via terraform.
+- Create tables and your entire schema in this database. Log in to another EC2 instance that we created. Run the command to connect to the RDS instance. Query the appdatabase database and you should see the contents of the table you created.
+- This demonstrates that our RDS database is working as a shared database instance - accessible from both the web servers.
 
 
 
