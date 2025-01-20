@@ -39,4 +39,15 @@ provider "aws" {
 ### Virtual Private Cloud (VPC)
 
 - A VPC is a virtual network dedicated to your AWS account. It is isolated from other virtual networks in the AWS cloud.
-- 
+
+```sh
+resource "aws_vpc" "app_vpc" {
+  cidr_block = "10.0.0.0/16"
+  enable_dns_support = true
+  enable_dns_hostnames = true
+  tags = {
+    Name = "AppVPC"
+  }
+}
+```
+
