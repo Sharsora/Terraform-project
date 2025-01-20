@@ -24,6 +24,14 @@ provider "aws" {
 ```
 - This specifies that Terraform should use the AWS provider and sets the region where your resources will be created.
 
+```sh
+provider "aws" {
+  region     = "us-east-1"
+  access_key = "<access_key>"
+  secret_key = "<secret_key>"
+}
+```
+
 ## Building the Infrastructure
 
 - Our web application will need a VPC, EC2 instances, and an RDS instance. We will define each of these components in our main.tf file.
