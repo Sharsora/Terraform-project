@@ -288,3 +288,34 @@ resource "aws_instance" "WebServer2" {
   }
 }
 ```
+
+- Add two outputs to the configuration that contain the instance IDs of the created EC2 instances.
+- Name the outputs as instance1_id and instance2_id respectively.
+
+```sh
+output "instance1_id" {
+  value = aws_instance.WebServer1.id
+}
+
+output "instance2_id" {
+  value = aws_instance.WebServer2.id
+}
+```
+
+### Relational Database Service (RDS)
+
+- For data persistence, we will set up an RDS instance. It's managed by AWS, which simplifies database administration tasks such as backups and patching.
+
+- We will now be provisioning an RDS database instance. We want this instance to be accessible from the security group of the web servers.
+- Create a database subnet group called app-db-subnet-group which should include the subnets within the VPC AppVPC.
+
+```sh
+resource "aws_db_subnet_group" "app_db_subnet_group" {
+  name       = "app-db-subnet-group"
+  subnet_ids = [aws_subnet.AppSubnet1.id, aws_subnet.AppSubnet2.id]  
+
+  tags = {
+    Name = "AppDBSubnetGroup"
+  }
+}
+```
