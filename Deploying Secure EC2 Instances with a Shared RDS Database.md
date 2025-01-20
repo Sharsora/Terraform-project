@@ -147,5 +147,27 @@ resource "aws_security_group" "WebTrafficSG" {
 }
 ```
 
+### network interface
 
+- Create two network interfaces - nw-interface1 and nw-interface2.
+- Both of the interfaces should use WebTrafficSG as the security group, while the nw-interface1 should use AppSubnet1 and nw-interface2 use AppSubnet2 respectively.
+Note: The names for the interfaces should be their tags.
+
+```sh
+resource "aws_network_interface" "nw-interface1" {
+  subnet_id = aws_subnet.AppSubnet1.id
+  security_groups = [aws_security_group.WebTrafficSG.id]
+  tags = {
+    Name        = "nw-interface1"
+  }  
+}
+
+resource "aws_network_interface" "nw-interface2" {
+  subnet_id = aws_subnet.AppSubnet2.id
+  security_groups = [aws_security_group.WebTrafficSG.id]
+  tags = {
+    Name        = "nw-interface2"
+  }  
+}
+```
 
