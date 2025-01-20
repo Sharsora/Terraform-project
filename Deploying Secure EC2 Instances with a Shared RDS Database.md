@@ -221,3 +221,17 @@ resource "aws_route_table_association" "AppSubnet2_association" {
   route_table_id = aws_route_table.AppRouteTable.id
 }
 ```
+
+- To ensure that our future EC2 instances get assigned a public IP address, create two Elastic IP (EIP) resources and attach to one network interface each - nw-interface1 andnw-interface2.
+
+```sh
+resource "aws_eip" "public_ip1" {
+  vpc = true
+  network_interface = aws_network_interface.nw-interface1.id
+}
+
+resource "aws_eip" "public_ip2" {
+  vpc = true
+  network_interface = aws_network_interface.nw-interface2.id
+}
+```
