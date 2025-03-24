@@ -1,7 +1,7 @@
 
 ### Local setup
 - install Terraform on your platform
-- You need to install AWS-CLI to use the aws functionally from your terminal
+- install AWS-CLI to use the aws functionally from your terminal
 
 ### Now in AWS Console
 
@@ -13,4 +13,6 @@
   Store state files on remote location
 - create an s3 bucket to save the state file on a remote location
 - create bucket name learning-terraform
-- Also enable Bucket versioning
+- Also enable Bucket versioning to allow for state recovery in the case of accidental deletions and human error.
+
+- state-locking so that we can keep tfstate file consistent while working on a collaborative project
