@@ -1,4 +1,4 @@
-```sh
+
 terraform {
   backend "s3" {
     bucket = "learning-terraform"
@@ -7,4 +7,4 @@ terraform {
     dynamodb_table = "dynamoDB-state-locking"
   }
 }
-```
+
