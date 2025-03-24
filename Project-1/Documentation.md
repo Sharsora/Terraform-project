@@ -5,5 +5,8 @@
 
 ### Now in AWS Console
 
-1. Create USER
+- Create USER
 - actually, we should follow the Principle of least privilege but we need to use many services to here you can give AdministratorAccess.
+- Create Acess key
+- Configure AWS-CLI
+  
