@@ -17,4 +17,4 @@
 
 - Check state-locking so that we can keep tfstate file consistent while working on a collaborative project
 
-- Now go to the dynamoDB service dashboard and click on create table button. Give your table name whatever you want but in Partition Key give the name LockID (NOTE: it is case sensitive) coz then only dynamoDB will be able to lock the file and release the file. and then click on create table button.
+- Now go to the dynamoDB service dashboard and click on create table button. Give your table name whatever you want but in Partition Key give the name LockID (NOTE: it is case sensitive) and type as String becoz then only dynamoDB will be able to lock the file and release the file. and then click on create table button.
