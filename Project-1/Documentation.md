@@ -18,3 +18,5 @@
 - Check state-locking so that we can keep tfstate file consistent while working on a collaborative project
 
 - Now go to the dynamoDB service dashboard and click on create table button. Give your table name whatever you want but in Partition Key give the name LockID (NOTE: it is case sensitive) and type as String becoz then only dynamoDB will be able to lock the file and release the file. and then click on create table button.
+
+- Create terraform.tfvars file, you can name anything just needs to end with .tfvars or .auto.tfvars significant of this file is the variables that you have declares in variables.tf, you can initialise variables with the value over here.
