@@ -17,8 +17,6 @@
 
 - Check state-locking so that we can keep tfstate file consistent while working on a collaborative project
 
-- Now go to the dynamoDB service dashboard and click on create table button. Give your table name whatever you want but in Partition Key give the name LockID (NOTE: it is case sensitive) and type as String becoz then only dynamoDB will be able to lock the file and release the file. and then click on create table button.
-
 - Create terraform.tfvars file, you can name anything just needs to end with .tfvars or .auto.tfvars significant of this file is the variables that you have declares in variables.tf, you can initialise variables with the value over here.
 
 - Backend.tf
@@ -26,4 +24,7 @@
 - When we dont use backend it will just store the tfstate file locally in your server and it will have some confidential data it will have details of your credentials. Hence it is best practice to use backend to store tfstate file so that whenever you run terraform command, it will access from S3 bucket.
 - the reasone why we not use variables in this file because backend configuration does not support variables so that is why we have hardcoded here.
 
-- 
+- why we need DynamoDB table?
+- when you have terraform configuration you have stored your tfstate file remotely in S3 backend, now there will be multiple user accessing those configuration at the same time it will acquire something called as as lock to then configuration. To avoid that locking situation you create dynamoDB table.
+- Now go to the dynamoDB service dashboard on AWS console and click on create table button. Give your table name whatever you want but in Partition Key give the name LockID (NOTE: it is case sensitive) only then it will be use in the remote backend and type as String becoz then only dynamoDB will be able to lock the file and release the file. and then click on create table button.
+
